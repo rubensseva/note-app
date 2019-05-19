@@ -10,22 +10,37 @@ router.get('/', (req, res) => {
 
 // Home page route.
 router.post('/loginUser', (req, res) => {
-  console.log("config")
+  console.log("login user with credentials")
   console.log(cookieConfig)
-    const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '" AND password = "' + req.body.password + '"';
-    console.log(query)
-    fireQuery(query).then((result) => {
-        console.log("printing ans");
-        console.log(result)
-        res.cookie('noteapp', result[0].userName, cookieConfig);
-        return res.json({msg: "success"});
-    })
-    .catch((err) => {
-        return res.status(404).json(err);
-    })
+  const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '" AND password = "' + req.body.password + '"';
+  console.log(query)
+  fireQuery(query).then((result) => {
+      console.log("printing ans");
+      console.log(result)
+      res.cookie('noteapp', result[0].userName, cookieConfig);
+      return res.json({msg: "success"});
+  })
+  .catch((err) => {
+      console.log("something went wrong")
+      console.log(err)
+      return res.status(404).json(err);
+  })
 })
 
-//});
+router.post('/cookieLogin', (req, res) => {
+  console.log("cookie login")
+  console.log(cookieConfig)
+  const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '";';
+  console.log(query)
+  fireQuery(query).then((result) => {
+      console.log("printing ans");
+      console.log(result)
+      return res.json({msg: "success"});
+  })
+  .catch((err) => {
+      return res.status(404).json(err);
+  })
+})
 
 
 

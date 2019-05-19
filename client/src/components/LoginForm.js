@@ -4,13 +4,34 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
+
 export class LoginForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {username: "", password: ""}
+
+    this.handleUsernameChange = this.handleUsernameChange.bind(this)
+    this.handlePasswordChange = this.handlePasswordChange.bind(this)
+    this.handleUserCredentialsSubmit = this.handleUserCredentialsSubmit.bind(this)
+  }
+
+  handleUsernameChange(e) {
+    this.setState({username: e.target.value})
+  }
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value})
+  } 
+  handleUserCredentialsSubmit() {
+    console.log("submitting")
+    this.props.LoginUserWithCredentials(this.state.username, this.state.password)
   }
 
   render() {
     const { classes } = this.props;
+    console.log("state")
+    console.log(this.state)
+    console.log("props")
+    console.log(this.props)
     return (
       <div>
         <Grid container direction="column" alignItems="center">
@@ -21,9 +42,9 @@ export class LoginForm extends Component {
             <TextField
               label="Username"
               type="username"
-              hintText="Enter your username here"
-              floatingLabelText="Username"
-              style={{ backgroundColor: "#fff" }}
+              hinttext="Enter your username here"
+              floatinglabeltext="Username"
+              onChange={this.handleUsernameChange}
             />
           </Grid>
           <br />
@@ -31,12 +52,13 @@ export class LoginForm extends Component {
             <TextField
               label="Password"
               type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
+              hinttext="Enter your Password"
+              floatinglabeltext="Password"
+              onChange={this.handlePasswordChange}
             />
           </Grid>
           <Grid item style={{ margin: "50px" }}>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={this.handleUserCredentialsSubmit}>
               Log in
             </Button>
           </Grid>

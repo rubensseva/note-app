@@ -13,8 +13,8 @@ app.use(cookieParser('my_secret_key'));
 
 
 
-app.use('/users', Users);
-app.use('/usercontent', Subjects);
+app.use('/api/user', Users);
+app.use('/api/usercontent', Subjects);
 
 app.get('/', (req, res) => {
   res.send("welcome!");

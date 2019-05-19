@@ -1,5 +1,5 @@
 export const addCard = (_name, _question, _answer) => dispatch => {
-  console.log("hello");
+  console.log("add card action creator");
   dispatch({
     type: "ADD_CARD",
     payload: {

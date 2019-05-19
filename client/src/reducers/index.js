@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import cardReducer from "./cardReducer";
+import userReducer from "./userReducer";
 
 const appReducer = combineReducers({
-  cards: cardReducer
+  cards: cardReducer,
+  user: userReducer
 });
 
 const rootReducer = (state, action) => {
