@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import cardReducer from './cardReducer';
+import { combineReducers } from "redux";
+import cardReducer from "./cardReducer";
 
 const appReducer = combineReducers({
   cards: cardReducer
@@ -7,6 +7,6 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   return appReducer(state, action);
-}
+};
 
 export default rootReducer;

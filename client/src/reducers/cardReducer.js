@@ -1,14 +1,15 @@
-
 const initialState = {
-  cards: [{
-  name: "defaultname",
-  question: "default question",
-  answer: "default answer"
-  }]
-}
+  cards: [
+    {
+      name: "defaultname",
+      question: "default question",
+      answer: "default answer"
+    }
+  ]
+};
 
 export default function(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case "ADD_CARD":
       return {
         ...state,
@@ -17,5 +18,5 @@ export default function(state = initialState, action) {
 
     default:
       return state;
-    }
+  }
 }

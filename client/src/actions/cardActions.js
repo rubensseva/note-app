@@ -1,5 +1,3 @@
-
-
 export const addCard = (_name, _question, _answer) => dispatch => {
   console.log("hello");
   dispatch({
@@ -9,5 +7,5 @@ export const addCard = (_name, _question, _answer) => dispatch => {
       question: _question,
       answer: _answer
     }
-  })
+  });
 };
