@@ -1,15 +1,15 @@
 const initialState = {
-    user: {
         name: "",
-      }
   };
   
   export default function(state = initialState, action) {
+    console.log(action)
+    console.log(action.payload)
     switch (action.type) {
       case "LOGIN_USER":
         return {
           ...state,
-          user: action.payload
+          ...action.payload
         };
       default:
         return state;

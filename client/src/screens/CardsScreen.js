@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import { addCard } from "../actions/cardActions";
+import { addCard, getCardsByUserTopic } from "../actions/cardActions";
 import CardsBox from "../components/CardsBox.js";
 
 export class Cards extends Component {
@@ -28,16 +28,28 @@ export class Cards extends Component {
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
   }
 
+  componentDidMount() {
+    console.log("getting cards with topic:")
+    console.log(this.props.topics.activeTopicId)
+    if (this.props.topics.activeTopicId) {
+      console.log("firing getCardsByUserTopic!!!")
+      this.props.getCardsByUserTopic(this.props.topics.activeTopicId)
+    }
+  }
+
   handleAddCardDialogOpen() {
     this.setState({ cardDialogOpen: true });
   }
   handleAddCardDialogSubmit() {
-    console.log("do we get here");
+    console.log("Adding a card! printinfg state then props");
+    console.log(this.state)
+    console.log(this.props)
     this.setState({ cardDialogOpen: false });
     this.props.addCard(
       this.state.dialogName,
       this.state.dialogQuestion,
-      this.state.dialogAnswer
+      this.state.dialogAnswer,
+      this.props.topics.activeTopicId
     );
   }
 
@@ -52,14 +64,15 @@ export class Cards extends Component {
   }
 
   render() {
+    console.log("topic: ")
+    console.log(this.props.topics.activeTopicId)
     return (
       <div>
         <Button onClick={this.handleAddCardDialogOpen}>
           press here to add a card
         </Button>
         <Dialog open={this.state.cardDialogOpen}>
-          <DialogContent>
-            <DialogTitle>Add a new card</DialogTitle>
+          <DialogContent> <DialogTitle>Add a new card</DialogTitle>
             <DialogContentText>
               You may submit a new card here
             </DialogContentText>
@@ -73,7 +86,6 @@ export class Cards extends Component {
               onChange={this.handleNameChange}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="question"
               label="Question"
@@ -83,7 +95,6 @@ export class Cards extends Component {
               onChange={this.handleQuestionChange}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="answer"
               label="Answer"
@@ -105,10 +116,11 @@ export class Cards extends Component {
 }
 
 const mapStateToProps = state => ({
-  cards: state.cards
+  cards: state.cards,
+  topics: state.topics
 });
 
 export default connect(
   mapStateToProps,
-  { addCard }
+  { addCard, getCardsByUserTopic }
 )(Cards);

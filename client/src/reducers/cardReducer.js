@@ -15,8 +15,16 @@ export default function(state = initialState, action) {
         ...state,
         cards: [...state.cards, action.payload]
       };
+    case "GET_ACTIVE_TOPIC_CARDS":
+      console.log("in get cards")
+      console.log(action.payload)
+      return {
+        ...state,
+        cards: action.payload
+      }
 
     default:
       return state;
   }
+
 }

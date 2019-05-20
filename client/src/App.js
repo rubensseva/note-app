@@ -6,6 +6,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 
 import { addCard } from "./actions/cardActions";
 import LoginScreen from "./screens/LoginScreen";
+import TopicScreen from "./screens/TopicsScreen"
 import "./App.css";
 
 import Cards from "./screens/CardsScreen";
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={LoginScreen} />
           <Route exact path="/cards" component={Cards} />
+          <Route exact path="/topics" component={TopicScreen} />
         </Switch>
       </HashRouter>
     </Provider>

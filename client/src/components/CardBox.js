@@ -48,7 +48,7 @@ export class CardBox extends Component {
             <Grid container direction="column" alignItems="center">
               <Typography variant="h6">{this.props.name}</Typography>
               <Typography variant="subheading">Question:</Typography>
-              <Typography variant="p">{this.props.question}</Typography>
+              <Typography variant="subheading">{this.props.question}</Typography>
             </Grid>
           </Paper>
         </Grid>
@@ -59,7 +59,7 @@ export class CardBox extends Component {
           >
             <Grid container direction="column" alignItems="center">
               <Typography variant="subheading">Answer:</Typography>
-              <Typography variant="p">{this.props.answer}</Typography>
+              <Typography variant="subheading">{this.props.answer}</Typography>
             </Grid>
           </Paper>
         </Grid>

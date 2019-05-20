@@ -30,7 +30,8 @@ router.post('/loginUser', (req, res) => {
 router.post('/cookieLogin', (req, res) => {
   console.log("cookie login")
   console.log(cookieConfig)
-  const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '";';
+  console.log(JSON.stringify(req.cookies))
+  // const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '";';
   console.log(query)
   fireQuery(query).then((result) => {
       console.log("printing ans");
