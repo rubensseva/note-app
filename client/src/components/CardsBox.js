@@ -36,24 +36,14 @@ export class CardsBox extends Component {
 
     return (
       <Grid container direction="row" alignItems="center" justify="center">
-        <Grid item xs={6} sm={6} lg={6} xl={6}>
+        <Grid item xs={1} sm={6} lg={9} xl={12}>
           <Grid
             container
-            direction="column"
+            direction="row"
             alignItems="center"
             justify="center"
           >
-            {cardsLeft}
-          </Grid>
-        </Grid>
-        <Grid item xs={6} sm={6} lg={6} xl={6}>
-          <Grid
-            container
-            direction="column"
-            alignItems="center"
-            justify="center"
-          >
-            {cardsRight}
+            {cardsMapped}
           </Grid>
         </Grid>
       </Grid>

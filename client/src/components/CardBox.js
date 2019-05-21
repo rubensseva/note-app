@@ -40,7 +40,7 @@ export class CardBox extends Component {
         isFlipped={this.state.isFlipped}
         flipDirection="horizontal"
       >
-        <Grid item style={{ width: "200px" }} key="front">
+        <Grid item style={{ width: "200px", margin: "10px"}} key="front">
           <Paper
             style={{ minHeight: "200px", backgroundColor: this.state.color }}
             onClick={this.handleFlip}
@@ -52,7 +52,7 @@ export class CardBox extends Component {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item style={{ width: "200px" }} key="back">
+        <Grid item style={{ width: "200px", margin: "10px" }} key="back">
           <Paper
             style={{ minHeight: "200px", backgroundColor: this.state.color }}
             onClick={this.handleFlip}

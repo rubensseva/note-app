@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -67,7 +68,7 @@ export class Cards extends Component {
     console.log("topic: ")
     console.log(this.props.topics.activeTopicId)
     return (
-      <div>
+      <Grid container >
         <Button onClick={this.handleAddCardDialogOpen}>
           press here to add a card
         </Button>
@@ -110,7 +111,7 @@ export class Cards extends Component {
         </Dialog>
 
         <CardsBox cards={this.props.cards} />
-      </div>
+      </Grid>
     );
   }
 }
