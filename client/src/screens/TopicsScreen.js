@@ -16,27 +16,49 @@ export class TopicsScreen extends Component {
     constructor(props) {
         super(props)
 
-        this.state = ({topicDialogOpen: false})
+        this.state = ({
+            topicDialogOpen: false,
+            topicName: "",
+            topicDescription: ""
+        })
+        
+        this.handleDialogOpen = this.handleDialogOpen.bind(this);
+        this.addTopic = this.addTopic.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     }
 
     componentDidMount() {
         this.props.getTopicsByUser()
     }
 
-    addTopic() {
-        this.props.addTopic()
+    handleDialogOpen() {
+        this.setState({ topicDialogOpen: true })
     }
+    addTopic() {
+        this.props.addTopic(this.state.topicName, this.state.topicDescription)
+        this.props.getTopicsByUser()
+        this.setState({topicDialogOpen: false})
+    }
+
+
+  handleNameChange(e) {
+    this.setState({ topicName: e.target.value });
+  }
+  handleDescriptionChange(e) {
+    this.setState({ topicDescription: e.target.value });
+  }
 
     render() {
         return (
             <Grid container direction="column" alignItems="center">
-                <Button onClich={this.addTopic}>
+                <Button onClick={this.handleDialogOpen}>
                     add topic
                 </Button>
                     <Dialog open={this.state.topicDialogOpen}>
-                    <DialogContent> <DialogTitle>Add a new card</DialogTitle>
+                    <DialogContent> <DialogTitle>Add a new topic</DialogTitle>
                         <DialogContentText>
-                        You may submit a new card here
+                        You may add a new topic here
                         </DialogContentText>
                         <TextField
                         autoFocus
@@ -58,7 +80,7 @@ export class TopicsScreen extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleAddCardDialogSubmit}>submit</Button>
+                        <Button onClick={this.addTopic}>submit</Button>
                     </DialogActions>
                     </Dialog>
                 This is the topics screen

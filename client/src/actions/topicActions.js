@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const addTopic = (_name, _description) => dispatch => {
-    axios.post('api/addTopic', {
+    axios.post('api/topics/addTopic', {
         name: _name,
         description: _description
     })
