@@ -22,9 +22,6 @@ export const LoginUserWithCookie = () => dispatch => {
 };
 
 export const LoginUserWithCredentials = (_name, _password) => dispatch => {
-  console.log("in login with credentials");
-  console.log("name " + _name);
-  console.log("password " + _password);
   axios
     .post("/api/user/loginUser", {
       name: _name,
