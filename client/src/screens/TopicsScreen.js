@@ -57,7 +57,8 @@ export class TopicsScreen extends Component {
     render() {
         return (
             <Grid container direction="column" alignItems="center">
-                <Button onClick={this.handleDialogOpen}>
+                This is the topics screen
+                <Button onClick={this.handleDialogOpen} variant="contained">
                     add topic
                 </Button>
                     <Dialog open={this.state.topicDialogOpen} onClose={this.handleDialogOutsideClick}>
@@ -90,7 +91,6 @@ export class TopicsScreen extends Component {
                         <Button onClick={this.addTopic}>submit</Button>
                     </DialogActions>
                     </Dialog>
-                This is the topics screen
                 <TopicsList topics={this.props.topics} setActiveTopic={this.props.setActiveTopic}/>
             </Grid>
         )

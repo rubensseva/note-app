@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 import CardBox from "./CardBox";
 
-export class CardsBox extends Component {
+export class CardsContainer extends Component {
   render() {
     console.log("printing cards in cardsbox");
     console.log(this.props.cards);
@@ -51,4 +51,4 @@ export class CardsBox extends Component {
   }
 }
 
-export default CardsBox;
+export default CardsContainer;

@@ -31,10 +31,7 @@ export class CardBox extends Component {
   }
 
   handleDeleteCard() {
-    console.log("deleting card") 
-    this.props.deleteCard(this.props.card.id);
-    console.log(this.props.activeTopicId)
-    setTimeout(() => this.props.getCardsByUserTopic(this.props.activeTopicId), 500)
+    this.props.deleteCard(this.props.card.id, this.props.activeTopicId);
   }
 
   generateRandomColor() {
