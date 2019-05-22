@@ -10,8 +10,8 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  console.log("in root reducer with payload:")
-  console.log(action.payload)
+  console.log("in root reducer with payload:");
+  console.log(action.payload);
   return appReducer(state, action);
 };
 

@@ -6,7 +6,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 
 import { addCard } from "./actions/cardActions";
 import LoginScreen from "./screens/LoginScreen";
-import TopicScreen from "./screens/TopicsScreen"
+import TopicScreen from "./screens/TopicsScreen";
 import "./App.css";
 
 import Cards from "./screens/CardsScreen";

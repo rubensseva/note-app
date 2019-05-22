@@ -7,9 +7,16 @@ import CardBox from "./CardBox";
 
 export class CardsContainer extends Component {
   render() {
-
     let cardsMapped = this.props.cards.cards.map(card => (
-      <CardBox name={card.name} question={card.question} answer={card.answer} card={card} activeTopicId={this.props.activeTopicId} deleteCard={this.props.deleteCard} getCardsByUserTopic={this.props.getCardsByUserTopic}/>
+      <CardBox
+        name={card.name}
+        question={card.question}
+        answer={card.answer}
+        card={card}
+        activeTopicId={this.props.activeTopicId}
+        deleteCard={this.props.deleteCard}
+        getCardsByUserTopic={this.props.getCardsByUserTopic}
+      />
     ));
 
     let cardsRight = [];
@@ -25,16 +32,10 @@ export class CardsContainer extends Component {
       changer = !changer;
     }
 
-
     return (
       <Grid container direction="row" alignItems="center" justify="center">
         <Grid item xs={1} sm={6} lg={9} xl={12}>
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify="center"
-          >
+          <Grid container direction="row" alignItems="center" justify="center">
             {cardsMapped}
           </Grid>
         </Grid>

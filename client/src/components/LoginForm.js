@@ -4,26 +4,30 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-
 export class LoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {username: "", password: ""}
+    this.state = { username: "", password: "" };
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    this.handleUserCredentialsSubmit = this.handleUserCredentialsSubmit.bind(this)
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleUserCredentialsSubmit = this.handleUserCredentialsSubmit.bind(
+      this
+    );
   }
 
   handleUsernameChange(e) {
-    this.setState({username: e.target.value})
+    this.setState({ username: e.target.value });
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value})
-  } 
+    this.setState({ password: e.target.value });
+  }
   handleUserCredentialsSubmit() {
-    console.log("submitting")
-    this.props.LoginUserWithCredentials(this.state.username, this.state.password)
+    console.log("submitting");
+    this.props.LoginUserWithCredentials(
+      this.state.username,
+      this.state.password
+    );
   }
 
   render() {
@@ -53,7 +57,11 @@ export class LoginForm extends Component {
             />
           </Grid>
           <Grid item style={{ margin: "50px" }}>
-            <Button variant="contained" color="primary" onClick={this.handleUserCredentialsSubmit}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.handleUserCredentialsSubmit}
+            >
               Log in
             </Button>
           </Grid>

@@ -3,8 +3,8 @@ import ReactCardFlip from "react-card-flip";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Fab from '@material-ui/core/Fab'
-import DeleteIcon from '@material-ui/icons/Delete'
+import Fab from "@material-ui/core/Fab";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export class CardBox extends Component {
   constructor(props) {
@@ -34,14 +34,14 @@ export class CardBox extends Component {
   }
 
   render() {
-    console.log("props in cardbox")
-    console.log(this.props)
+    console.log("props in cardbox");
+    console.log(this.props);
     return (
       <ReactCardFlip
         isFlipped={this.state.isFlipped}
         flipDirection="horizontal"
       >
-        <Grid item style={{ width: "200px", margin: "10px"}} key="front">
+        <Grid item style={{ width: "200px", margin: "10px" }} key="front">
           <Paper
             style={{ minHeight: "200px", backgroundColor: this.state.color }}
             onClick={this.handleFlip}
@@ -49,7 +49,9 @@ export class CardBox extends Component {
             <Grid container direction="column" alignItems="center">
               <Typography variant="h6">{this.props.name}</Typography>
               <Typography variant="subheading">Question:</Typography>
-              <Typography variant="subheading">{this.props.question}</Typography>
+              <Typography variant="subheading">
+                {this.props.question}
+              </Typography>
             </Grid>
           </Paper>
         </Grid>
@@ -61,7 +63,16 @@ export class CardBox extends Component {
             <Grid container direction="column" alignItems="center">
               <Typography variant="subheading">Answer:</Typography>
               <Typography variant="subheading">{this.props.answer}</Typography>
-              <Fab size="small" style={{opacity: "0.2", position: "fixed", top: "5px", right: "15px"}} onClick={this.handleDeleteCard}>
+              <Fab
+                size="small"
+                style={{
+                  opacity: "0.2",
+                  position: "fixed",
+                  top: "5px",
+                  right: "15px"
+                }}
+                onClick={this.handleDeleteCard}
+              >
                 <DeleteIcon />
               </Fab>
             </Grid>
