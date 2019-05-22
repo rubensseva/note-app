@@ -27,19 +27,23 @@ router.post('/loginUser', (req, res) => {
   })
 })
 
-router.post('/cookieLogin', (req, res) => {
+router.get('/cookieLogin', (req, res) => {
   console.log("cookie login")
   console.log(cookieConfig)
   console.log(JSON.stringify(req.cookies))
-  // const query = 'SELECT * FROM User WHERE userName = "' + req.body.name + '";';
+  const query = 'SELECT * FROM User WHERE userName = "' + req.cookies.noteapp + '";';
   console.log(query)
   fireQuery(query).then((result) => {
       console.log("printing ans");
       console.log(result)
-      return res.json({msg: "success"});
+      if (result.length == 1) {
+        return res.json({msg: "success", name: result[0].userName});
+      } else {
+        return res.status(404)({msg: "user not found"})
+      }
   })
   .catch((err) => {
-      return res.status(404).json(err);
+      return res.status(500).json(err);
   })
 })
 

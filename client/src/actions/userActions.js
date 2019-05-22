@@ -5,6 +5,16 @@ export const LoginUserWithCookie = () => dispatch => {
   })
   .then(function (response) {
     console.log(response);
+    if (response.data.msg == "success") {
+      dispatch({
+        type: "LOGIN_USER",
+        payload: {
+          name: response.data.name
+        }
+      })
+    } else {
+      console.log("cookie login did not succeed")
+    }
   })
   .catch(function (error) {
     console.log(error);

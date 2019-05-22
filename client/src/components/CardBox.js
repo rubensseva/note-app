@@ -3,6 +3,8 @@ import ReactCardFlip from "react-card-flip";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Fab from '@material-ui/core/Fab'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 export class CardBox extends Component {
   constructor(props) {
@@ -20,11 +22,19 @@ export class CardBox extends Component {
 
     this.handleFlip = this.handleFlip.bind(this);
     this.generateRandomColor = this.generateRandomColor.bind(this);
+    this.handleDeleteCard = this.handleDeleteCard.bind(this);
   }
 
   handleFlip() {
     const _isFlipped = this.state.isFlipped;
     this.setState({ isFlipped: !_isFlipped });
+  }
+
+  handleDeleteCard() {
+    console.log("deleting card") 
+    this.props.deleteCard(this.props.card.id);
+    console.log(this.props.activeTopicId)
+    setTimeout(() => this.props.getCardsByUserTopic(this.props.activeTopicId), 500)
   }
 
   generateRandomColor() {
@@ -35,6 +45,8 @@ export class CardBox extends Component {
   }
 
   render() {
+    console.log("props in cardbox")
+    console.log(this.props)
     return (
       <ReactCardFlip
         isFlipped={this.state.isFlipped}
@@ -60,6 +72,9 @@ export class CardBox extends Component {
             <Grid container direction="column" alignItems="center">
               <Typography variant="subheading">Answer:</Typography>
               <Typography variant="subheading">{this.props.answer}</Typography>
+              <Fab size="small" style={{opacity: "0.2", position: "fixed", top: "5px", right: "15px"}} onClick={this.handleDeleteCard}>
+                <DeleteIcon />
+              </Fab>
             </Grid>
           </Paper>
         </Grid>

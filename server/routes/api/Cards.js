@@ -21,12 +21,22 @@ router.post('/addCardToTopic', (req, res) => {
     })
 })
 
+router.post('/deleteCard', (req, res) => {
+    const { cardId } = req.body;
+    const query = "DELETE FROM Card WHERE cardId = '" + cardId + "';";
+    fireQuery(query).then((response) => {
+      console.log(response)
+      res.json(response)
+    })
+    .catch((err) => res.status(500).json(err))
+})
+
 
 router.post('/getCardsByUserTopic', (req, res) => {
     console.log('fetching user cards by topic id. Printing cookies then body')
     console.log(req.cookies)
     console.log(req.body)
-    const query = 'SELECT DISTINCT C.cardId as id, C.name as name, C.question as question, C.answer as answer FROM Card AS C, Topic AS T WHERE T.userNameRef = "' + req.cookies.noteapp + '" AND C.topicId = "' + req.body.topicId + '";';
+    const query = 'SELECT DISTINCT C.cardId as id, C.name as name, C.question as question, C.answer as answer, C.topicId as topicId FROM Card AS C, Topic AS T WHERE T.userNameRef = "' + req.cookies.noteapp + '" AND C.topicId = "' + req.body.topicId + '";';
     fireQuery(query).then((response) => {
         console.log(response)
         res.json(response)

@@ -26,6 +26,7 @@ export class TopicsScreen extends Component {
         this.addTopic = this.addTopic.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+        this.handleDialogOutsideClick = this.handleDialogOutsideClick.bind(this);
     }
 
     componentDidMount() {
@@ -37,8 +38,8 @@ export class TopicsScreen extends Component {
     }
     addTopic() {
         this.props.addTopic(this.state.topicName, this.state.topicDescription)
-        this.props.getTopicsByUser()
-        this.setState({topicDialogOpen: false})
+        setTimeout(this.props.getTopicsByUser, 500);
+        this.setState({topicDialogOpen: false, topicName: "", topicDescription: ""})
     }
 
 
@@ -49,13 +50,17 @@ export class TopicsScreen extends Component {
     this.setState({ topicDescription: e.target.value });
   }
 
+  handleDialogOutsideClick() {
+      this.setState({ topicDialogOpen: false })
+  }
+
     render() {
         return (
             <Grid container direction="column" alignItems="center">
                 <Button onClick={this.handleDialogOpen}>
                     add topic
                 </Button>
-                    <Dialog open={this.state.topicDialogOpen}>
+                    <Dialog open={this.state.topicDialogOpen} onClose={this.handleDialogOutsideClick}>
                     <DialogContent> <DialogTitle>Add a new topic</DialogTitle>
                         <DialogContentText>
                         You may add a new topic here
@@ -64,18 +69,20 @@ export class TopicsScreen extends Component {
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Name of card"
+                        label="Name of topic"
                         type="text"
                         fullWidth
+                        value={this.state.topicName}
                         onChange={this.handleNameChange}
                         />
                         <TextField
                         margin="dense"
-                        id="question"
-                        label="Question"
+                        id="description"
+                        label="Description of topic"
                         type="text"
                         fullWidth
                         multiline
+                        value={this.state.topicDescription}
                         onChange={this.handleDescriptionChange}
                         />
                     </DialogContent>

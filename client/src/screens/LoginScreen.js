@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 
-import { LoginUserWithCredentials } from "../actions/userActions";
+import { LoginUserWithCredentials, LoginUserWithCookie } from "../actions/userActions";
 import LoginForm from "../components/LoginForm";
 
 export class LoginScreen extends Component {
@@ -11,6 +11,10 @@ export class LoginScreen extends Component {
     super(props);
 
     this.renderRedirect = this.renderRedirect.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.LoginUserWithCookie() 
   }
 
   renderRedirect() {
@@ -36,5 +40,5 @@ const mapStateToProps = state => ({ user: state.user });
 
 export default connect(
   mapStateToProps,
-  { LoginUserWithCredentials }
+  { LoginUserWithCredentials, LoginUserWithCookie }
 )(LoginScreen);

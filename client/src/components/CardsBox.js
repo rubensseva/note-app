@@ -11,7 +11,7 @@ export class CardsBox extends Component {
     console.log(this.props.cards);
 
     let cardsMapped = this.props.cards.cards.map(card => (
-      <CardBox name={card.name} question={card.question} answer={card.answer} />
+      <CardBox name={card.name} question={card.question} answer={card.answer} card={card} activeTopicId={this.props.activeTopicId} deleteCard={this.props.deleteCard} getCardsByUserTopic={this.props.getCardsByUserTopic}/>
     ));
 
     let cardsRight = [];

@@ -47,15 +47,9 @@ export class TopicsList extends Component {
       console.log("do we get here")
       console.log(this.props)
       _topics = this.props.topics.topics.map(topic => (
-      <Button onClick={() => this.handleTopicSubmit(topic.topicId)}>
+      <Button onClick={() => this.handleTopicSubmit(topic.topicId)} variant="contained" style={{margin: "10px"}}>
         <Typography>
-          Name: {topic.name}
-        </Typography>
-        <Typography>
-          Description: {topic.description}
-        </Typography>
-        <Typography>
-          Temporary field, content: {topic.markdownContent}
+          {topic.name}
         </Typography>
       </Button>
       ))

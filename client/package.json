@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "prettier": "^1.17.1",
     "react": "^16.8.6",
     "react-card-flip": "^0.7.1",
