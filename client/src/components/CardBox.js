@@ -21,7 +21,6 @@ export class CardBox extends Component {
     };
 
     this.handleFlip = this.handleFlip.bind(this);
-    this.generateRandomColor = this.generateRandomColor.bind(this);
     this.handleDeleteCard = this.handleDeleteCard.bind(this);
   }
 
@@ -32,13 +31,6 @@ export class CardBox extends Component {
 
   handleDeleteCard() {
     this.props.deleteCard(this.props.card.id, this.props.activeTopicId);
-  }
-
-  generateRandomColor() {
-    let r = Math.round(Math.random() * 255); //red 0 to 255
-    let g = Math.round(Math.random() * 255); //green 0 to 255
-    let b = Math.round(Math.random() * 255); //blue 0 to 255
-    return "rgb(" + r + ", " + g + ", " + b + ")";
   }
 
   render() {

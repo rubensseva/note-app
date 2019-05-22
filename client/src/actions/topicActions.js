@@ -6,10 +6,8 @@ export const addTopic = (_name, _description) => dispatch => {
         description: _description
     })
     .then((response) => {
-        dispatch({
-            type: "ADD_TOPIC",
-            payload: response.data
-        })
+        console.log(response)
+        dispatch(getTopicsByUser())
     })
     .catch((err) => console.log(err))
 }

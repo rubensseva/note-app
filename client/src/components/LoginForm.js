@@ -27,11 +27,6 @@ export class LoginForm extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    console.log("state")
-    console.log(this.state)
-    console.log("props")
-    console.log(this.props)
     return (
       <div>
         <Grid container direction="column" alignItems="center">

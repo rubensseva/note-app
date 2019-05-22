@@ -1,9 +1,9 @@
 const initialState = {
   cards: [
     {
-      name: "defaultname",
-      question: "default question",
-      answer: "default answer"
+      name: "Loading",
+      question: "This card should not stay here for to long",
+      answer: "Some answer"
     }
   ]
 };
@@ -16,8 +16,6 @@ export default function(state = initialState, action) {
         cards: [...state.cards, action.payload]
       };
     case "GET_ACTIVE_TOPIC_CARDS":
-      console.log("in get cards")
-      console.log(action.payload)
       return {
         ...state,
         cards: action.payload

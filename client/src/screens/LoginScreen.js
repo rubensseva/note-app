@@ -18,15 +18,11 @@ export class LoginScreen extends Component {
   }
 
   renderRedirect() {
-    console.log("render")
-
     if(this.props.user.name) {
       return <Redirect to="/topics"/>
     }
   }
   render() {
-    console.log("login screens props")
-    console.log(this.props)
     return (
       <Grid container direction="column">
         <LoginForm LoginUserWithCredentials={this.props.LoginUserWithCredentials} />
