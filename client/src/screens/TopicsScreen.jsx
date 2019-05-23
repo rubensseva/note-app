@@ -14,10 +14,12 @@ import AddTopicButton from "../components/AddTopicButton";
 
 export class TopicsScreen extends Component {
   componentDidMount() {
-    this.props.getTopicsByUser();
+    const { getTopicsByUser } = this.props;
+    getTopicsByUser();
   }
 
   render() {
+    const { topics, addTopic, setActiveTopic } = this.props;
     return (
       <Grid container direction="column" alignItems="center">
         <Paper style={{ margin: "40px" }}>
@@ -25,11 +27,8 @@ export class TopicsScreen extends Component {
             Here you may find your own created topics, or create a new one
           </Typography>
         </Paper>
-        <AddTopicButton addTopic={this.props.addTopic} />
-        <TopicsList
-          topics={this.props.topics}
-          setActiveTopic={this.props.setActiveTopic}
-        />
+        <AddTopicButton addTopic={addTopic} />
+        <TopicsList topics={topics} setActiveTopic={setActiveTopic} />
       </Grid>
     );
   }

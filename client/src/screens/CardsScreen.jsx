@@ -14,24 +14,20 @@ import AddCardButton from "../components/AddCardButton";
 export class Cards extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cardDialogOpen: false,
-      dialogName: "",
-      dialogQuestion: "",
-      dialogAnswer: ""
-    };
-
     this.redirectToTopicScreen = this.redirectToTopicScreen.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.topics.activeTopicId) {
-      this.props.getCardsByUserTopic(this.props.topics.activeTopicId);
+    const { topics, getCardsByUserTopic } = this.props;
+    const { activeTopicId } = topics;
+    if (activeTopicId) {
+      getCardsByUserTopic(activeTopicId);
     }
   }
 
   redirectToTopicScreen() {
-    if (!this.props.topics.activeTopicId) {
+    const { activeTopicId } = this.props;
+    if (!activeTopicId) {
       return <Redirect to="/topics" />;
     } else {
       return null;
@@ -39,17 +35,21 @@ export class Cards extends Component {
   }
 
   render() {
+    const {
+      topics,
+      addCard,
+      cards,
+      deleteCard,
+      getCardsByUserTopic
+    } = this.props;
     return (
       <Grid container>
-        <AddCardButton
-          activeTopicId={this.props.topics.activeTopicId}
-          addCard={this.props.addCard}
-        />
+        <AddCardButton activeTopicId={topics.activeTopicId} addCard={addCard} />
         <CardsContainer
-          cards={this.props.cards}
-          activeTopicId={this.props.topics.activeTopicId}
-          deleteCard={this.props.deleteCard}
-          getCardsByUserTopic={this.props.getCardsByUserTopic}
+          cards={cards}
+          activeTopicId={topics.activeTopicId}
+          deleteCard={deleteCard}
+          getCardsByUserTopic={getCardsByUserTopic}
         />
         {this.redirectToTopicScreen()}
       </Grid>

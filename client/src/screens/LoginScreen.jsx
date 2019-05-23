@@ -17,20 +17,21 @@ export class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.LoginUserWithCookie();
+    const { LoginUserWithCookie } = this.props;
+    LoginUserWithCookie();
   }
 
   renderRedirect() {
-    if (this.props.user.name) {
+    const { user } = this.props;
+    if (user.name) {
       return <Redirect to="/topics" />;
     }
   }
   render() {
+    const { LoginUserWithCredentials } = this.props;
     return (
       <Grid container direction="column">
-        <LoginForm
-          LoginUserWithCredentials={this.props.LoginUserWithCredentials}
-        />
+        <LoginForm LoginUserWithCredentials={LoginUserWithCredentials} />
         {this.renderRedirect()}
       </Grid>
     );
