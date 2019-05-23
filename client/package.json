@@ -5,17 +5,15 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "prettier": "^1.17.1",
+    "axios": "^0.18.0",
     "react": "^16.8.6",
     "react-card-flip": "^0.7.1",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "react-trianglify": "git+https://github.com/flexzuu/react-trianglify.git",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "trianglify": "^2.0.0"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +36,12 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "http://localhost:5000/",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.17.1"
+  }
 }
