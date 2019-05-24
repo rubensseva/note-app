@@ -1,36 +1,55 @@
 import React, { Component } from "react";
+import axios from 'axios'
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab"
+import CreateIcon from "@material-ui/icons/Create"
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export class AddCardButton extends Component {
+export class EditCardButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardDialogOpen: false,
+      dialogOpen: false,
+      loading: true,
       dialogName: "",
       dialogQuestion: "",
       dialogAnswer: ""
     };
 
-    this.handleAddCardDialogOpen = this.handleAddCardDialogOpen.bind(this);
-    this.handleAddCardDialogSubmit = this.handleAddCardDialogSubmit.bind(this);
+    this.handleDialogOpen = this.handleDialogOpen.bind(this);
+    this.handleDialogClose = this.handleDialogClose.bind(this);
+    this.handleDialogSubmit = this.handleDialogSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
     this.handleAnswerChange = this.handleAnswerChange.bind(this);
-    this.handleDialogOutsideClick = this.handleDialogOutsideClick.bind(this);
   }
 
-  handleAddCardDialogOpen() {
-    this.setState({ cardDialogOpen: true });
+  handleDialogOpen() {
+    console.log(this.props.cardId)
+    this.setState({ dialogOpen: true, loading: true });
+    axios.post('/api/cards/getCardById', {
+      cardId: this.props.cardId
+    })
+    .then(response => {
+      console.log("got a response")
+      console.log(response)
+      this.setState({
+        dialogName: response.data[0].name,
+        dialogQuestion: response.data[0].question,
+        dialogAnswer: response.data[0].answer,
+        loading: false
+      })
+    })
+    .catch(err => console.log(err))
   }
 
-  handleAddCardDialogSubmit() {
+  handleDialogSubmit() {
     const { topics, addCard } = this.props;
     const {
       dialogName,
@@ -39,7 +58,7 @@ export class AddCardButton extends Component {
     } = this.state;
     addCard(dialogName, dialogQuestion, dialogAnswer, topics.activeTopicId);
     this.setState({
-      cardDialogOpen: false,
+      dialogOpen: false,
       dialogName: "",
       dialogQuestion: "",
       dialogAnswer: ""
@@ -56,27 +75,21 @@ export class AddCardButton extends Component {
     this.setState({ dialogAnswer: e.target.value });
   }
 
-  handleDialogOutsideClick() {
-    this.setState({ cardDialogOpen: false });
+  handleDialogClose() {
+    this.setState({ dialogOpen: false });
   }
 
   render() {
     const {
-      cardDialogOpen,
+      dialogOpen,
       dialogName,
       dialogQuestion,
       dialogAnswer
     } = this.state;
     return (
       <Grid container>
-        <Button
-          onClick={this.handleAddCardDialogOpen}
-          variant="contained"
-          style={{ margin: "10px" }}
-        >
-          press here to add a card
-        </Button>
-        <Dialog open={cardDialogOpen} onClose={this.handleDialogOutsideClick}>
+
+        <Dialog open={dialogOpen} onClose={this.handleDialogClose}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new card</DialogTitle>
@@ -115,12 +128,21 @@ export class AddCardButton extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleAddCardDialogSubmit}>submit</Button>
+            <Button onClick={this.handleEditCardDialogSubmit}>submit</Button>
           </DialogActions>
         </Dialog>
+        <Fab
+          size="small"
+          style={{
+            opacity: "0.4",
+          }}
+          onClick={this.handleDialogOpen}
+        >
+          <CreateIcon />
+        </Fab>
       </Grid>
     );
   }
 }
 
-export default AddCardButton;
+export default EditCardButton;

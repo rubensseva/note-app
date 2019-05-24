@@ -15,7 +15,6 @@ const fireQuery = query => {
     console.log("connection initiated");
     connection.query(query, function(error, results, fields) {
       console.log("inside connection query");
-      console.log(results);
       if (error) reject(error);
       console.log("resolving");
       resolve(results);

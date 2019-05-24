@@ -3,8 +3,9 @@ import ReactCardFlip from "react-card-flip";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Fab from "@material-ui/core/Fab";
-import DeleteIcon from "@material-ui/icons/Delete";
+
+import DeleteCardButton from './DeleteCardButton';
+import EditCardButton from './EditCardButton';
 
 export class CardBox extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ export class CardBox extends Component {
     };
 
     this.handleFlip = this.handleFlip.bind(this);
-    this.handleDeleteCard = this.handleDeleteCard.bind(this);
   }
 
   handleFlip() {
@@ -30,15 +30,12 @@ export class CardBox extends Component {
     this.setState({ isFlipped: !_isFlipped });
   }
 
-  handleDeleteCard() {
-    const { card, activeTopicId, deleteCard } = this.props;
-    deleteCard(card.id, activeTopicId);
-  }
-
   render() {
-    const { name, question, answer } = this.props;
+    const { card, deleteCard } = this.props;
+    const { name, question, answer, id, topicId } = card;
     const { isFlipped, color } = this.state;
     return (
+      <Grid item style={{margin: "30px"}} >
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <Grid item style={{ width: "200px", margin: "10px" }} key="front">
           <Paper
@@ -60,22 +57,13 @@ export class CardBox extends Component {
             <Grid container direction="column" alignItems="center">
               <Typography variant="subheading">Answer:</Typography>
               <Typography variant="subheading">{answer}</Typography>
-              <Fab
-                size="small"
-                style={{
-                  opacity: "0.2",
-                  position: "fixed",
-                  top: "5px",
-                  right: "15px"
-                }}
-                onClick={this.handleDeleteCard}
-              >
-                <DeleteIcon />
-              </Fab>
             </Grid>
           </Paper>
         </Grid>
       </ReactCardFlip>
+      <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
+      <EditCardButton cardId={id}/>
+      </Grid>
     );
   }
 }

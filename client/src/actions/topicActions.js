@@ -30,6 +30,8 @@ export const getTopicsByUser = () => dispatch => {
 };
 
 export const setActiveTopic = topicId => dispatch => {
+  console.log("setting active topic")
+  console.log(topicId)
   dispatch({
     type: "SET_ACTIVE_TOPIC",
     payload: topicId

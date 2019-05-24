@@ -5,13 +5,11 @@ import CardBox from "./CardBox";
 
 export const CardsContainer = props => {
   const { cards, activeTopicId, deleteCard, getCardsByUserTopic } = props;
+  console.log(props)
 
   let cardsMapped = cards.cards.map(card => (
     <CardBox
-      key={cards.id}
-      name={card.name}
-      question={card.question}
-      answer={card.answer}
+      key={card.id}
       card={card}
       activeTopicId={activeTopicId}
       deleteCard={deleteCard}

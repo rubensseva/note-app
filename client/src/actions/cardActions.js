@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const addCard = (_name, _question, _answer, _topicId) => dispatch => {
+  console.log("topicid")
+  console.log(_topicId)
   axios
     .post("/api/cards/addCardToTopic", {
       name: _name,

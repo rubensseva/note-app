@@ -20,6 +20,7 @@ export class Cards extends Component {
   componentDidMount() {
     const { topics, getCardsByUserTopic } = this.props;
     const { activeTopicId } = topics;
+    console.log(this.props)
     if (activeTopicId) {
       getCardsByUserTopic(activeTopicId);
     }
@@ -42,8 +43,12 @@ export class Cards extends Component {
       deleteCard,
       getCardsByUserTopic
     } = this.props;
+    console.log("topics")
+    console.log(topics)
+    console.log(topics.activeTopicId)
     return (
       <Grid container>
+        {this.redirectToTopicScreen()}
         <AddCardButton activeTopicId={topics.activeTopicId} addCard={addCard} />
         <CardsContainer
           cards={cards}
@@ -51,7 +56,6 @@ export class Cards extends Component {
           deleteCard={deleteCard}
           getCardsByUserTopic={getCardsByUserTopic}
         />
-        {this.redirectToTopicScreen()}
       </Grid>
     );
   }

@@ -5,7 +5,7 @@ export const LoginUserWithCookie = () => dispatch => {
     .get("/api/user/cookieLogin", {})
     .then(function(response) {
       console.log(response);
-      if (response.data.msg == "success") {
+      if (response.data.msg === "success") {
         dispatch({
           type: "LOGIN_USER",
           payload: {
