@@ -17,7 +17,6 @@ export const getTopicsByUser = () => dispatch => {
   axios
     .get("api/topics")
     .then(response => {
-      console.log("response");
       console.log(response);
 
       dispatch({
@@ -31,8 +30,6 @@ export const getTopicsByUser = () => dispatch => {
 };
 
 export const setActiveTopic = topicId => dispatch => {
-  console.log("in set active topic action");
-  console.log(topicId);
   dispatch({
     type: "SET_ACTIVE_TOPIC",
     payload: topicId

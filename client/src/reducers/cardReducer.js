@@ -1,6 +1,7 @@
 const initialState = {
   cards: [
     {
+      id: 1,
       name: "Loading",
       question: "This card should not stay here for to long",
       answer: "Some answer"

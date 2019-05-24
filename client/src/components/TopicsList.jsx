@@ -7,27 +7,31 @@ import Typography from "@material-ui/core/Typography";
 export class TopicsList extends Component {
   constructor(props) {
     super(props);
-    this.state = { topics: [], localChosenTopic: null };
+    this.state = { localChosenTopic: null };
 
     this.handleTopicSubmit = this.handleTopicSubmit.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   handleTopicSubmit(_topicId) {
-    this.props.setActiveTopic(_topicId);
+    const { setActiveTopic } = this.props;
+    setActiveTopic(_topicId);
     this.setState({ localChosenTopic: _topicId });
   }
 
   renderRedirect() {
-    if (this.state.localChosenTopic) {
+    const { localChosenTopic } = this.state;
+    if (localChosenTopic) {
       return <Redirect to="/cards" />;
     }
   }
 
   render() {
+    const { topics } = this.props;
     let _topics;
-    _topics = this.props.topics.topics.map(topic => (
+    _topics = topics.topics.map(topic => (
       <Button
+        key={topic.topicId}
         onClick={() => this.handleTopicSubmit(topic.topicId)}
         variant="contained"
         style={{ margin: "10px" }}

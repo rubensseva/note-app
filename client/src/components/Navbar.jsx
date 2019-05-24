@@ -17,7 +17,8 @@ export class Navbar extends Component {
   }
 
   renderRedirects() {
-    if (this.state.topicsRedirect) {
+    const { topicsRedirect } = this.state;
+    if (topicsRedirect) {
       this.setState({ topicsRedirect: false });
       return <Redirect to="/topics" />;
     }

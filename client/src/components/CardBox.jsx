@@ -25,44 +25,41 @@ export class CardBox extends Component {
   }
 
   handleFlip() {
-    const _isFlipped = this.state.isFlipped;
+    const { isFlipped } = this.state;
+    const _isFlipped = isFlipped;
     this.setState({ isFlipped: !_isFlipped });
   }
 
   handleDeleteCard() {
-    this.props.deleteCard(this.props.card.id, this.props.activeTopicId);
+    const { card, activeTopicId, deleteCard } = this.props;
+    deleteCard(card.id, activeTopicId);
   }
 
   render() {
-    console.log("props in cardbox");
-    console.log(this.props);
+    const { name, question, answer } = this.props;
+    const { isFlipped, color } = this.state;
     return (
-      <ReactCardFlip
-        isFlipped={this.state.isFlipped}
-        flipDirection="horizontal"
-      >
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
         <Grid item style={{ width: "200px", margin: "10px" }} key="front">
           <Paper
-            style={{ minHeight: "200px", backgroundColor: this.state.color }}
+            style={{ minHeight: "200px", backgroundColor: color }}
             onClick={this.handleFlip}
           >
             <Grid container direction="column" alignItems="center">
-              <Typography variant="h6">{this.props.name}</Typography>
+              <Typography variant="h6">{name}</Typography>
               <Typography variant="subheading">Question:</Typography>
-              <Typography variant="subheading">
-                {this.props.question}
-              </Typography>
+              <Typography variant="subheading">{question}</Typography>
             </Grid>
           </Paper>
         </Grid>
         <Grid item style={{ width: "200px", margin: "10px" }} key="back">
           <Paper
-            style={{ minHeight: "200px", backgroundColor: this.state.color }}
+            style={{ minHeight: "200px", backgroundColor: color }}
             onClick={this.handleFlip}
           >
             <Grid container direction="column" alignItems="center">
               <Typography variant="subheading">Answer:</Typography>
-              <Typography variant="subheading">{this.props.answer}</Typography>
+              <Typography variant="subheading">{answer}</Typography>
               <Fab
                 size="small"
                 style={{

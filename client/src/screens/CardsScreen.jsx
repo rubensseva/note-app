@@ -26,8 +26,8 @@ export class Cards extends Component {
   }
 
   redirectToTopicScreen() {
-    const { activeTopicId } = this.props;
-    if (!activeTopicId) {
+    const { topics } = this.props;
+    if (!topics.activeTopicId) {
       return <Redirect to="/topics" />;
     } else {
       return null;

@@ -31,12 +31,14 @@ export class AddCardButton extends Component {
   }
 
   handleAddCardDialogSubmit() {
-    this.props.addCard(
-      this.state.dialogName,
-      this.state.dialogQuestion,
-      this.state.dialogAnswer,
-      this.props.activeTopicId
-    );
+    const { addCard } = this.props;
+    const {
+      dialogName,
+      dialogQuestion,
+      dialogAnswer,
+      activeTopicId
+    } = this.state;
+    addCard(dialogName, dialogQuestion, dialogAnswer, activeTopicId);
     this.setState({
       cardDialogOpen: false,
       dialogName: "",
@@ -60,6 +62,12 @@ export class AddCardButton extends Component {
   }
 
   render() {
+    const {
+      cardDialogOpen,
+      dialogName,
+      dialogQuestion,
+      dialogAnswer
+    } = this.state;
     return (
       <Grid container>
         <Button
@@ -69,10 +77,7 @@ export class AddCardButton extends Component {
         >
           press here to add a card
         </Button>
-        <Dialog
-          open={this.state.cardDialogOpen}
-          onClose={this.handleDialogOutsideClick}
-        >
+        <Dialog open={cardDialogOpen} onClose={this.handleDialogOutsideClick}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new card</DialogTitle>
@@ -86,7 +91,7 @@ export class AddCardButton extends Component {
               label="Name of card"
               type="text"
               fullWidth
-              value={this.state.dialogName}
+              value={dialogName}
               onChange={this.handleNameChange}
             />
             <TextField
@@ -96,7 +101,7 @@ export class AddCardButton extends Component {
               type="text"
               fullWidth
               multiline
-              value={this.state.dialogQuestion}
+              value={dialogQuestion}
               onChange={this.handleQuestionChange}
             />
             <TextField
@@ -106,7 +111,7 @@ export class AddCardButton extends Component {
               type="text"
               fullWidth
               multiline
-              value={this.state.dialogAnswer}
+              value={dialogAnswer}
               onChange={this.handleAnswerChange}
             />
           </DialogContent>

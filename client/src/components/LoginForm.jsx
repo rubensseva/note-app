@@ -23,11 +23,9 @@ export class LoginForm extends Component {
     this.setState({ password: e.target.value });
   }
   handleUserCredentialsSubmit() {
-    console.log("submitting");
-    this.props.LoginUserWithCredentials(
-      this.state.username,
-      this.state.password
-    );
+    const { LoginUserWithCredentials } = this.props;
+    const { username, password } = this.state;
+    LoginUserWithCredentials(username, password);
   }
 
   render() {

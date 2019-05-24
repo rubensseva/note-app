@@ -2,7 +2,6 @@
   "extends": [
     "airbnb", 
     "prettier", 
-    "plugin:react-redux/recommended", 
     "eslint:recommended", 
     "plugin:react/recommended"
   ],
@@ -14,6 +13,7 @@
   "rules": {
     "prettier/prettier": ["error"],
     "import/no-named-as-default": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-console": 0
   }
 }

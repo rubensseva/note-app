@@ -28,7 +28,9 @@ export class AddTopicButton extends Component {
     this.setState({ topicDialogOpen: true });
   }
   addTopic() {
-    this.props.addTopic(this.state.topicName, this.state.topicDescription);
+    const { addTopic } = this.props;
+    const { topicName, topicDescription } = this.state;
+    addTopic(topicName, topicDescription);
     this.setState({
       topicDialogOpen: false,
       topicName: "",
@@ -48,15 +50,13 @@ export class AddTopicButton extends Component {
   }
 
   render() {
+    const { topicDialogOpen, topicName, topicDescription } = this.state;
     return (
       <Grid container direction="column" alignItems="center">
         <Button onClick={this.handleDialogOpen} variant="contained">
           Press here to add a topic
         </Button>
-        <Dialog
-          open={this.state.topicDialogOpen}
-          onClose={this.handleDialogOutsideClick}
-        >
+        <Dialog open={topicDialogOpen} onClose={this.handleDialogOutsideClick}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new topic</DialogTitle>
@@ -68,7 +68,7 @@ export class AddTopicButton extends Component {
               label="Name of topic"
               type="text"
               fullWidth
-              value={this.state.topicName}
+              value={topicName}
               onChange={this.handleNameChange}
             />
             <TextField
@@ -78,7 +78,7 @@ export class AddTopicButton extends Component {
               type="text"
               fullWidth
               multiline
-              value={this.state.topicDescription}
+              value={topicDescription}
               onChange={this.handleDescriptionChange}
             />
           </DialogContent>
