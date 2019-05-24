@@ -1,34 +1,28 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
 
-var { fireQuery } = require("../helpers/MysqlConnector");
-var { cookieConfig } = require("../helpers/config");
+const router = express.Router();
+
+const { fireQuery } = require("../helpers/MysqlConnector");
 
 router.get("/", (req, res) => {
   res.send("usercontent api");
 });
 
 router.post("/addSubject", (req, res) => {
-  const signedCookies = req.signedCookies; // get signed cookies
+  const { signedCookies } = req; // get signed cookies
   console.log("signed-cookies:", signedCookies);
   console.log(signedCookies.noteapp);
-  if (signedCookies.noteapp != req.body.userNameRef) {
+  if (signedCookies.noteapp !== req.body.userNameRef) {
     res
       .status(404)
       .json({ msg: "Something went wront. Maybe unauthenticated" });
   }
 
-  const query =
-    "INSERT INTO Subject " +
+  const query = `${"INSERT INTO Subject " +
     "(`name`, " +
     "`userNameRef`) " +
     "VALUES " +
-    "('" +
-    req.body.name +
-    "', " +
-    "'" +
-    req.body.userNameRef +
-    "');";
+    "('"}${req.body.name}', '${req.body.userNameRef}');`;
 
   console.log(query);
   fireQuery(query)
@@ -37,10 +31,9 @@ router.post("/addSubject", (req, res) => {
       console.log(result);
       if (result) {
         console.log("success");
-        res.json({ msg: "success" });
-      } else {
-        return res.status(404).json({ msg: "user not found" });
+        return res.json({ msg: "success" });
       }
+      return res.status(404).json({ msg: "user not found" });
     })
     .catch(err => {
       return res.status(404).json(err);

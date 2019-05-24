@@ -31,38 +31,44 @@ export class CardBox extends Component {
   }
 
   render() {
-    const { card, deleteCard } = this.props;
+    const { card, deleteCard, updateCard } = this.props;
     const { name, question, answer, id, topicId } = card;
     const { isFlipped, color } = this.state;
     return (
       <Grid item style={{margin: "30px"}} >
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-        <Grid item style={{ width: "200px", margin: "10px" }} key="front">
-          <Paper
-            style={{ minHeight: "200px", backgroundColor: color }}
-            onClick={this.handleFlip}
-          >
-            <Grid container direction="column" alignItems="center">
-              <Typography variant="h6">{name}</Typography>
-              <Typography variant="subheading">Question:</Typography>
-              <Typography variant="subheading">{question}</Typography>
-            </Grid>
-          </Paper>
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+          <Grid item style={{ width: "200px", margin: "10px" }} key="front">
+            <Paper
+              style={{ minHeight: "200px", backgroundColor: color }}
+              onClick={this.handleFlip}
+            >
+              <Grid container direction="column" alignItems="center">
+                <Typography variant="h6">{name}</Typography>
+                <Typography variant="subheading">Question:</Typography>
+                <Typography variant="subheading">{question}</Typography>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid item style={{ width: "200px", margin: "10px" }} key="back">
+            <Paper
+              style={{ minHeight: "200px", backgroundColor: color }}
+              onClick={this.handleFlip}
+            >
+              <Grid container direction="column" alignItems="center">
+                <Typography variant="subheading">Answer:</Typography>
+                <Typography variant="subheading">{answer}</Typography>
+              </Grid>
+            </Paper>
+          </Grid>
+        </ReactCardFlip>
+        <Grid container direction="row" >
+        <Grid item >
+          <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
         </Grid>
-        <Grid item style={{ width: "200px", margin: "10px" }} key="back">
-          <Paper
-            style={{ minHeight: "200px", backgroundColor: color }}
-            onClick={this.handleFlip}
-          >
-            <Grid container direction="column" alignItems="center">
-              <Typography variant="subheading">Answer:</Typography>
-              <Typography variant="subheading">{answer}</Typography>
-            </Grid>
-          </Paper>
+        <Grid item >
+          <EditCardButton cardId={id} topicId={topicId} updateCard={updateCard}/>
         </Grid>
-      </ReactCardFlip>
-      <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
-      <EditCardButton cardId={id}/>
+        </Grid>
       </Grid>
     );
   }

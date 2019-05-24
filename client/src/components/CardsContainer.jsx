@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import CardBox from "./CardBox";
 
 export const CardsContainer = props => {
-  const { cards, activeTopicId, deleteCard, getCardsByUserTopic } = props;
+  const { cards, activeTopicId, deleteCard, getCardsByUserTopic, updateCard } = props;
   console.log(props)
 
   let cardsMapped = cards.cards.map(card => (
@@ -13,6 +13,7 @@ export const CardsContainer = props => {
       card={card}
       activeTopicId={activeTopicId}
       deleteCard={deleteCard}
+      updateCard={updateCard}
       getCardsByUserTopic={getCardsByUserTopic}
     />
   ));

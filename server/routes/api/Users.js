@@ -1,8 +1,9 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
 
-var { fireQuery } = require("../helpers/MysqlConnector");
-var { cookieConfig } = require("../helpers/config");
+const router = express.Router();
+
+const { fireQuery } = require("../helpers/MysqlConnector");
+const { cookieConfig } = require("../helpers/config");
 
 router.get("/", (req, res) => {
   res.send("user api");
@@ -12,12 +13,9 @@ router.get("/", (req, res) => {
 router.post("/loginUser", (req, res) => {
   console.log("login user with credentials");
   console.log(cookieConfig);
-  const query =
-    'SELECT * FROM User WHERE userName = "' +
-    req.body.name +
-    '" AND password = "' +
-    req.body.password +
-    '"';
+  const query = `SELECT * FROM User WHERE userName = "${
+    req.body.name
+  }" AND password = "${req.body.password}"`;
   console.log(query);
   fireQuery(query)
     .then(result => {
@@ -37,18 +35,16 @@ router.get("/cookieLogin", (req, res) => {
   console.log("cookie login");
   console.log(cookieConfig);
   console.log(JSON.stringify(req.cookies));
-  const query =
-    'SELECT * FROM User WHERE userName = "' + req.cookies.noteapp + '";';
+  const query = `SELECT * FROM User WHERE userName = "${req.cookies.noteapp}";`;
   console.log(query);
   fireQuery(query)
     .then(result => {
       console.log("printing ans");
       console.log(result);
-      if (result.length == 1) {
+      if (result.length === 1) {
         return res.json({ msg: "success", name: result[0].userName });
-      } else {
-        return res.status(404)({ msg: "user not found" });
       }
+      return res.status(404)({ msg: "user not found" });
     })
     .catch(err => {
       return res.status(500).json(err);

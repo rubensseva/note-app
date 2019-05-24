@@ -17,6 +17,25 @@ export const addCard = (_name, _question, _answer, _topicId) => dispatch => {
     .catch(err => console.log(err));
 };
 
+export const updateCard = (name, question, answer, topicId, cardId) => dispatch => {
+  console.log("update card")
+  console.log(name, question, answer, cardId, topicId)
+  axios
+    .post("/api/cards/updateCardById", {
+      name,
+      question,
+      answer,
+      cardId
+    })
+    .then(response => {
+      console.log(response)
+      dispatch(getCardsByUserTopic(topicId))
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 export const deleteCard = (cardId, topicId) => dispatch => {
   axios
     .post("/api/cards/deleteCard", {

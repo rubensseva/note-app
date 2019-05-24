@@ -57,7 +57,7 @@ router.post("/getCardById", (req, res) => {
         return res.status(404).json({ msg: "not found" });
       }
       console.log(response);
-      res.json(response);
+      return res.json(response);
     })
     .catch(err => {
       console.log(err);

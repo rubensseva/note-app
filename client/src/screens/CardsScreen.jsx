@@ -6,7 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import {
   addCard,
   getCardsByUserTopic,
-  deleteCard
+  deleteCard,
+  updateCard
 } from "../actions/cardActions";
 import CardsContainer from "../components/CardsContainer";
 import AddCardButton from "../components/AddCardButton";
@@ -41,6 +42,7 @@ export class Cards extends Component {
       addCard,
       cards,
       deleteCard,
+      updateCard,
       getCardsByUserTopic
     } = this.props;
     console.log("topics")
@@ -54,6 +56,7 @@ export class Cards extends Component {
           cards={cards}
           activeTopicId={topics.activeTopicId}
           deleteCard={deleteCard}
+          updateCard={updateCard}
           getCardsByUserTopic={getCardsByUserTopic}
         />
       </Grid>
@@ -68,5 +71,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addCard, getCardsByUserTopic, deleteCard }
+  { addCard, getCardsByUserTopic, deleteCard, updateCard }
 )(Cards);

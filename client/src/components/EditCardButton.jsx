@@ -50,13 +50,13 @@ export class EditCardButton extends Component {
   }
 
   handleDialogSubmit() {
-    const { topics, addCard } = this.props;
+    const { topicId, cardId, updateCard } = this.props;
     const {
       dialogName,
       dialogQuestion,
       dialogAnswer,
     } = this.state;
-    addCard(dialogName, dialogQuestion, dialogAnswer, topics.activeTopicId);
+    updateCard(dialogName, dialogQuestion, dialogAnswer, topicId, cardId);
     this.setState({
       dialogOpen: false,
       dialogName: "",
@@ -128,7 +128,7 @@ export class EditCardButton extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleEditCardDialogSubmit}>submit</Button>
+            <Button onClick={this.handleDialogSubmit}>submit</Button>
           </DialogActions>
         </Dialog>
         <Fab
