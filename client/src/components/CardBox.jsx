@@ -62,12 +62,12 @@ export class CardBox extends Component {
           </Grid>
         </ReactCardFlip>
         <Grid container direction="row" >
-        <Grid item >
-          <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
-        </Grid>
-        <Grid item >
-          <EditCardButton cardId={id} topicId={topicId} updateCard={updateCard}/>
-        </Grid>
+          <Grid item >
+            <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
+          </Grid>
+          <Grid item >
+            <EditCardButton cardId={id} topicId={topicId} updateCard={updateCard}/>
+          </Grid>
         </Grid>
       </Grid>
     );
