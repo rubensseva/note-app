@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { MarkdownPreview } from 'react-marked-markdown'
 import Grid from "@material-ui/core/Grid";
 
 import {
@@ -53,17 +52,6 @@ export class Cards extends Component {
     return (
       <Grid container>
         {this.redirectToTopicScreen()}
-        <MarkdownPreview
-          value={"```this should be some code```"}
-          markedOptions={{
-            gfm: true,
-            tables: true,
-            breaks: false,
-            pedantic: false,
-            sanitize: true,
-            smartLists: true,
-            smartypants: false
-          }} />
         <AddCardButton activeTopicId={topics.activeTopicId} addCard={addCard} />
         <CardsContainer
           cards={cards}

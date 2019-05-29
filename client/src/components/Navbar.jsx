@@ -28,8 +28,7 @@ export class Navbar extends Component {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Button color="inherit">Logout</Button>
-          <Button onClick={this.setTopicRedirect} color="inherit">
+          <Button onClick={this.setTopicRedirect} color="inherit" variant="outlined">
             Topics
           </Button>
         </Toolbar>

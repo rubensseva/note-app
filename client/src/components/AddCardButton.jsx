@@ -31,13 +31,14 @@ export class AddCardButton extends Component {
   }
 
   handleAddCardDialogSubmit() {
-    const { topics, addCard } = this.props;
+    const { activeTopicId, addCard } = this.props;
     const {
       dialogName,
       dialogQuestion,
       dialogAnswer,
     } = this.state;
-    addCard(dialogName, dialogQuestion, dialogAnswer, topics.activeTopicId);
+    console.log(this.props)
+    addCard(dialogName, dialogQuestion, dialogAnswer, activeTopicId);
     this.setState({
       cardDialogOpen: false,
       dialogName: "",
