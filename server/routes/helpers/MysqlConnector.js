@@ -1,11 +1,11 @@
-var mysql = require("mysql");
+const mysql = require("mysql");
 
 const fireQuery = query => {
   console.log("in fire query with query");
   console.log(query);
   return new Promise((resolve, reject) => {
-    var connection = mysql.createConnection({
-      host: "noteappdatabase.c3lkaicdughh.us-east-2.rds.amazonaws.com",
+    const connection = mysql.createConnection({
+      host: "ec2-18-224-229-87.us-east-2.compute.amazonaws.com",
       user: "rubenss",
       password: "Chicorea&11",
       database: "NoteAppDatabase"
