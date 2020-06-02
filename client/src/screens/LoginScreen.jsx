@@ -23,7 +23,8 @@ export class LoginScreen extends Component {
 
   renderRedirect() {
     const { user } = this.props;
-    if (user.name) {
+    console.log(user);
+    if (user && user.user && user.user.username) {
       return <Redirect to="/topics" />;
     }
   }

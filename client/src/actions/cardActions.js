@@ -50,7 +50,7 @@ export const deleteCard = (cardId, topicId) => dispatch => {
     });
 };
 
-export const getCardsByUserTopic = _topicId => dispatch => {
+export const getCardsByUserTopic = (_topicId) => dispatch => {
   axios
     .post("/api/cards/getCardsByUserTopic", { topicId: _topicId })
     .then(response => {

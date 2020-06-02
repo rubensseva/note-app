@@ -6,8 +6,8 @@ const fireQuery = query => {
   return new Promise((resolve, reject) => {
     const connection = mysql.createConnection({
       host: "ec2-18-224-229-87.us-east-2.compute.amazonaws.com",
-      user: "rubenss",
-      password: "Chicorea&11",
+      user: "root",
+      password: "testtest",
       database: "NoteAppDatabase"
     });
     console.log("initiating connection");

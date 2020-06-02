@@ -31,8 +31,8 @@ export class TopicsList extends Component {
     let _topics;
     _topics = topics.topics.map(topic => (
       <Button
-        key={topic.topicId}
-        onClick={() => this.handleTopicSubmit(topic.topicId)}
+        key={topic._id}
+        onClick={() => this.handleTopicSubmit(topic._id)}
         variant="contained"
         style={{ margin: "10px" }}
       >

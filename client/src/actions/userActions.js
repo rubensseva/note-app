@@ -32,7 +32,7 @@ export const LoginUserWithCredentials = (_name, _password) => dispatch => {
       dispatch({
         type: "LOGIN_USER",
         payload: {
-          name: _name
+          user: response.data
         }
       });
     })

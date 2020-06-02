@@ -67,7 +67,8 @@ export class Cards extends Component {
 
 const mapStateToProps = state => ({
   cards: state.cards,
-  topics: state.topics
+  topics: state.topics,
+  user: state.user
 });
 
 export default connect(

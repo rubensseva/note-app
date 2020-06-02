@@ -1,0 +1,27 @@
+{
+  "name": "server-ported",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.16",
+    "mongoose-history": "^0.8.0",
+    "mongoose-unique-validator": "^2.0.3",
+    "typescript": "^3.9.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/mongoose": "^5.7.21",
+    "@types/node": "^14.0.9",
+    "ts-node": "^8.10.2"
+  }
+}
