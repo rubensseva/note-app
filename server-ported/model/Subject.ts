@@ -12,11 +12,13 @@ interface ISubject extends mongoose.Document {
 const Subject = new Schema(
   {
     name: {
-      type: String
+      type: String,
+      required: true 
     },
     owner: {
       type: mongoose.Types.ObjectId,
-      ref: 'user'
+      ref: 'user',
+      required: true 
     },
   }
 );

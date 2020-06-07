@@ -14,18 +14,21 @@ interface ICard extends mongoose.Document {
 const Card = new Schema(
   {
     name: {
-      type: String
+      type: String,
+      required: true 
     },
     question: {
-      type: String
+      type: String,
+      required: true 
     },
     answer: {
-      type: String
-      
+      type: String,
+      required: true 
     },
     topic: {
       type: mongoose.Schema.Types.ObjectId, 
-      ref: 'topic'
+      ref: 'topic',
+      required: true 
     }
   },
 );

@@ -32,12 +32,8 @@ export class AddCardButton extends Component {
 
   handleAddCardDialogSubmit() {
     const { activeTopicId, addCard } = this.props;
-    const {
-      dialogName,
-      dialogQuestion,
-      dialogAnswer,
-    } = this.state;
-    console.log(this.props)
+    const { dialogName, dialogQuestion, dialogAnswer } = this.state;
+    console.log(this.props);
     addCard(dialogName, dialogQuestion, dialogAnswer, activeTopicId);
     this.setState({
       cardDialogOpen: false,
@@ -84,40 +80,47 @@ export class AddCardButton extends Component {
             <DialogContentText>
               You may submit a new card here
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Name of card"
-              type="text"
-              fullWidth
-              value={dialogName}
-              onChange={this.handleNameChange}
-            />
-            <TextField
-              margin="dense"
-              id="question"
-              label="Question"
-              type="text"
-              fullWidth
-              multiline
-              value={dialogQuestion}
-              onChange={this.handleQuestionChange}
-            />
-            <TextField
-              margin="dense"
-              id="answer"
-              label="Answer"
-              type="text"
-              fullWidth
-              multiline
-              value={dialogAnswer}
-              onChange={this.handleAnswerChange}
-            />
+            <form
+              id="addCardForm"
+              preventDefault="true"
+              onSubmit={this.handleAddCardDialogSubmit}
+            >
+              <TextField
+                margin="dense"
+                id="name"
+                label="Name of card"
+                type="text"
+                fullWidth
+                value={dialogName}
+                onChange={this.handleNameChange}
+              />
+              <TextField
+                margin="dense"
+                id="question"
+                label="Question"
+                type="text"
+                fullWidth
+                multiline
+                value={dialogQuestion}
+                onChange={this.handleQuestionChange}
+              />
+              <TextField
+                margin="dense"
+                id="answer"
+                label="Answer"
+                type="text"
+                fullWidth
+                multiline
+                value={dialogAnswer}
+                onChange={this.handleAnswerChange}
+              />
+              <DialogActions>
+                <Button type="submit" form="addCardForm">
+                  submit
+                </Button>
+              </DialogActions>
+            </form>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleAddCardDialogSubmit}>submit</Button>
-          </DialogActions>
         </Dialog>
       </Grid>
     );

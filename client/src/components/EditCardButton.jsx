@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import axios from 'axios'
+import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab"
-import CreateIcon from "@material-ui/icons/Create"
+import Fab from "@material-ui/core/Fab";
+import CreateIcon from "@material-ui/icons/Create";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -14,10 +14,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 export class EditCardButton extends Component {
   constructor(props) {
     super(props);
-    const { card: { name, question, answer }} = this.props;
+    const {
+      card: { name, question, answer }
+    } = this.props;
     this.state = {
       dialogOpen: false,
-      loading: true,
       dialogName: name,
       dialogQuestion: question,
       dialogAnswer: answer
@@ -32,35 +33,31 @@ export class EditCardButton extends Component {
   }
 
   handleDialogOpen() {
-    this.setState({ dialogOpen: true, loading: true });
-    axios.post('/api/cards/getCardById', {
-      cardId: this.props.cardId
-    })
-    .then(response => {
-      this.setState({
-        dialogName: response.data[0].name,
-        dialogQuestion: response.data[0].question,
-        dialogAnswer: response.data[0].answer,
-        loading: false
+    this.setState({ dialogOpen: true });
+    const { cardId } = this.props;
+    axios
+      .post("/api/cards/getCardById", {
+        cardId: cardId
       })
-    })
-    .catch(err => console.log(err))
+      .then(response => {
+        this.setState({
+          dialogName: response.data[0].name,
+          dialogQuestion: response.data[0].question,
+          dialogAnswer: response.data[0].answer
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   handleDialogSubmit() {
-    const { topicId, card: { _id: cardId }, updateCard } = this.props;
     const {
-      dialogName,
-      dialogQuestion,
-      dialogAnswer,
-    } = this.state;
+      topicId,
+      card: { _id: cardId },
+      updateCard
+    } = this.props;
+    const { dialogName, dialogQuestion, dialogAnswer } = this.state;
+    this.setState({ dialogOpen: false });
     updateCard(dialogName, dialogQuestion, dialogAnswer, topicId, cardId);
-    this.setState({
-      dialogOpen: false,
-      dialogName: "",
-      dialogQuestion: "",
-      dialogAnswer: ""
-    });
   }
 
   handleNameChange(e) {
@@ -78,21 +75,14 @@ export class EditCardButton extends Component {
   }
 
   render() {
-    const {
-      dialogOpen,
-      dialogName,
-      dialogQuestion,
-      dialogAnswer
-    } = this.state;
+    const { dialogOpen, dialogName, dialogQuestion, dialogAnswer } = this.state;
     return (
       <Grid container>
         <Dialog open={dialogOpen} onClose={this.handleDialogClose}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new card</DialogTitle>
-            <DialogContentText>
-              Edit card
-            </DialogContentText>
+            <DialogContentText>Edit card</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
@@ -131,7 +121,7 @@ export class EditCardButton extends Component {
         <Fab
           size="small"
           style={{
-            opacity: "0.4",
+            opacity: "0.4"
           }}
           onClick={this.handleDialogOpen}
         >

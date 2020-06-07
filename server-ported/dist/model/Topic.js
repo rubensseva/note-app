@@ -11,7 +11,7 @@ const Topic = new Schema({
         type: String
     },
     description: {
-        type: Number
+        type: String
     },
     owner: {
         type: mongoose_1.default.Types.ObjectId,

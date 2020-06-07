@@ -11,7 +11,7 @@ const Card = new Schema({
         type: String
     },
     question: {
-        type: Number
+        type: String
     },
     answer: {
         type: String

@@ -26,7 +26,7 @@ router.post("/loginUser", (req, res) => __awaiter(void 0, void 0, void 0, functi
             res.status(404).json({ msg: "wrong credentials" });
         }
         else {
-            res.json({ msg: "success" });
+            res.json(user);
         }
     }
     catch (e) {

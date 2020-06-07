@@ -13,12 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const Card_1 = __importDefault(require("../model/Card"));
 const router = express_1.default.Router();
 router.post("/addCardToTopic", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, question, answer, topicId } = req.body;
-        const card = new Card_1.default({ name, question, answer, topicId });
+        if (!name || !question || !answer || !topicId) {
+            res.status(500).json({ msg: "missing data", receivedBody: req.body });
+        }
+        const card = new Card_1.default({ name, question, answer, topic: mongoose_1.default.Types.ObjectId(topicId) });
         yield card.save();
         res.json({ msg: 'success' });
     }
@@ -35,10 +39,17 @@ router.post("/deleteCard", (req, res) => {
         res.status(500).json({ msg: e.toString() });
     }
 });
-router.post("/getCardsByUserTopic", (req, res) => {
-    console.log("fetching user cards by topic id. Printing cookies then body");
-    res.json({ msg: "not implemented yet" });
-});
+router.post("/getCardsByUserTopic", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        console.log("fetching user cards by topic id. Printing cookies then body");
+        const { topicId } = req.body;
+        const cards = yield Card_1.default.find({ topic: mongoose_1.default.Types.ObjectId(topicId) });
+        res.json(cards);
+    }
+    catch (e) {
+        res.status(500).json({ msg: e.toString() });
+    }
+}));
 router.post("/getCardById", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { cardId } = req.body;

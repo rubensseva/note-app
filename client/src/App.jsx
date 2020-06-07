@@ -9,7 +9,6 @@ import LoginScreen from "./screens/LoginScreen";
 import TopicsScreen from "./screens/TopicsScreen";
 import Cards from "./screens/CardsScreen";
 
-
 function App() {
   return (
     <Provider store={store}>

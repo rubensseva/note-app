@@ -4,6 +4,17 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
+const styles = {
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    placeItems: "center"
+  },
+  formElement: {
+    marginTop: "30px"
+  }
+};
+
 export class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +22,7 @@ export class LoginForm extends Component {
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleUserCredentialsSubmit = this.handleUserCredentialsSubmit.bind(
       this
     );
@@ -22,6 +34,11 @@ export class LoginForm extends Component {
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
   }
+  handleKeyPress(e) {
+    if (e.key === "Enter") {
+      this.handleUserCredentialsSubmit();
+    }
+  }
   handleUserCredentialsSubmit() {
     const { LoginUserWithCredentials } = this.props;
     const { username, password } = this.state;
@@ -32,37 +49,39 @@ export class LoginForm extends Component {
     return (
       <div>
         <Grid container direction="column" alignItems="center">
-          <Grid item style={{ padding: "50px" }}>
-            <Typography variant="h4">Log in with your username here</Typography>
-          </Grid>
-          <Grid item>
+          <form
+            style={styles.form}
+            preventDefault="true"
+            onSubmit={this.handleUserCredentialsSubmit}
+          >
+            <Typography style={styles.formElement} variant="h4">
+              Log in with your username here
+            </Typography>
             <TextField
+              style={styles.formElement}
               label="Username"
               type="username"
               hinttext="Enter your username here"
               floatinglabeltext="Username"
               onChange={this.handleUsernameChange}
             />
-          </Grid>
-          <br />
-          <Grid item>
             <TextField
+              style={styles.formElement}
               label="Password"
               type="password"
               hinttext="Enter your Password"
               floatinglabeltext="Password"
               onChange={this.handlePasswordChange}
             />
-          </Grid>
-          <Grid item style={{ margin: "50px" }}>
             <Button
+              style={styles.formElement}
               variant="contained"
               color="primary"
-              onClick={this.handleUserCredentialsSubmit}
+              type="submit"
             >
               Log in
             </Button>
-          </Grid>
+          </form>
         </Grid>
       </div>
     );

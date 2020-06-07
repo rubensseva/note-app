@@ -13,14 +13,16 @@ interface ITopic extends mongoose.Document {
 const Topic = new Schema(
   {
     name: {
-      type: String
+      type: String,
+      required: true 
     },
     description: {
       type: String
     },
     owner: {
       type: mongoose.Types.ObjectId,
-      ref: 'user' 
+      ref: 'user' ,
+      required: true
     },
   }
 );

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab"
-import CreateIcon from "@material-ui/icons/Create"
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -15,7 +13,6 @@ export class CreateUser extends Component {
     super(props);
     this.state = {
       dialogOpen: false,
-      loading: true,
       dialogUsername: "",
       dialogPassword: ""
     };
@@ -28,21 +25,18 @@ export class CreateUser extends Component {
   }
 
   handleDialogOpen() {
-    this.setState({ dialogOpen: true, loading: true });
-    console.log('dialog open');
+    this.setState({ dialogOpen: true });
+    console.log("dialog open");
   }
 
   handleDialogSubmit() {
     const { CreateUser } = this.props;
-    const {
-      dialogUsername,
-      dialogPassword
-    } = this.state;
+    const { dialogUsername, dialogPassword } = this.state;
     CreateUser(dialogUsername, dialogPassword);
     this.setState({
       dialogOpen: false,
       dialogUsername: "",
-      dialogPassword: "",
+      dialogPassword: ""
     });
   }
 
@@ -57,20 +51,14 @@ export class CreateUser extends Component {
   }
 
   render() {
-    const {
-      dialogOpen,
-      dialogUsername,
-      dialogPassword
-    } = this.state;
+    const { dialogOpen, dialogUsername, dialogPassword } = this.state;
     return (
-      <Grid container justify='center'>
+      <Grid container justify="center">
         <Dialog open={dialogOpen} onClose={this.handleDialogClose}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new user</DialogTitle>
-            <DialogContentText>
-              Create a new user here
-            </DialogContentText>
+            <DialogContentText>Create a new user here</DialogContentText>
             <TextField
               autoFocus
               margin="dense"
@@ -96,7 +84,12 @@ export class CreateUser extends Component {
             <Button onClick={this.handleDialogSubmit}>submit</Button>
           </DialogActions>
         </Dialog>
-        <Button onClick={this.handleDialogOpen} color="inherit" variant="outlined" style={{margin: '20px'}}>
+        <Button
+          onClick={this.handleDialogOpen}
+          color="inherit"
+          variant="outlined"
+          style={{ margin: "20px" }}
+        >
           Create new user
         </Button>
       </Grid>

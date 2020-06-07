@@ -20,11 +20,16 @@ router.post("/addCardToTopic", async (req, res) => {
   }
 });
 
-router.post("/deleteCard", (req, res) => {
+router.post("/deleteCard", async (req, res) => {
   try {
+    console.log('deleting card');
+    console.log(req.body);
     const { cardId } = req.body;
-    Card.deleteOne({_id: cardId})
+    await Card.deleteOne({_id: cardId})
+    res.json({msg: "success"});
+    console.log('deleted');
   } catch (e) {
+    console.log(e);
     res.status(500).json({msg: e.toString()})
   }
 });
@@ -36,6 +41,7 @@ router.post("/getCardsByUserTopic", async (req, res) => {
     const cards = await Card.find({topic: mongoose.Types.ObjectId(topicId)})
     res.json(cards);
   } catch (e) {
+    console.log(e)
     res.status(500).json({msg: e.toString()})
   }
 });
@@ -46,17 +52,19 @@ router.post("/getCardById", async (req, res) => {
     const card = await Card.findById(cardId)
     res.json(card);
   } catch (e) {
-    res.status(500).json({msg: e.toString()})
+    console.log(e);
+    res.status(500).json({msg: e.toString()});
   }
 });
 
-router.post("/updateCardById", (req, res) => {
+router.post("/updateCardById", async (req, res) => {
   try {
     const { name, question, answer, cardId } = req.body
-    const updatedCard = Card.updateOne({_id: cardId}, { $set: {name, question, answer}})
+    const updatedCard = await Card.updateOne({_id: cardId}, { $set: {name, question, answer}})
     res.json(updatedCard);
   } catch (e) {
-    res.status(500).json({msg: e.toString()})
+    console.log(e);
+    res.status(500).json({msg: e.toString()});
   }
 });
 

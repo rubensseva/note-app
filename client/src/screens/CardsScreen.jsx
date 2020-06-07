@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 
 import {
@@ -15,13 +14,12 @@ import AddCardButton from "../components/AddCardButton";
 export class Cards extends Component {
   constructor(props) {
     super(props);
-    this.redirectToTopicScreen = this.redirectToTopicScreen.bind(this);
   }
 
   componentDidMount() {
     const { topics, getCardsByUserTopic } = this.props;
     const { activeTopicId } = topics;
-    console.log(this.props)
+    console.log(this.props);
     if (activeTopicId) {
       getCardsByUserTopic(activeTopicId);
     }
@@ -36,10 +34,6 @@ export class Cards extends Component {
       updateCard,
       getCardsByUserTopic
     } = this.props;
-    console.log("topics")
-    console.log(topics)
-    console.log(topics.activeTopicId)
-    let mrk = "`this is code() int char def() ` hello "
     return (
       <Grid container>
         <AddCardButton activeTopicId={topics.activeTopicId} addCard={addCard} />
@@ -61,7 +55,9 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(
-  mapStateToProps,
-  { addCard, getCardsByUserTopic, deleteCard, updateCard }
-)(Cards);
+export default connect(mapStateToProps, {
+  addCard,
+  getCardsByUserTopic,
+  deleteCard,
+  updateCard
+})(Cards);

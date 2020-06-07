@@ -15,15 +15,16 @@ interface IUser extends mongoose.Document {
 const User = new Schema(
   {
     username: {
-      type: String
+      type: String,
+      unique: true,
+      required: true 
     },
     password: {
       type: String,
-      unique: true
+      required: true 
     },
     email: {
       type: String,
-      unique: true
     }
   }
 );
