@@ -14,12 +14,13 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 export class EditCardButton extends Component {
   constructor(props) {
     super(props);
+    const { card: { name, question, answer }} = this.props;
     this.state = {
       dialogOpen: false,
       loading: true,
-      dialogName: "",
-      dialogQuestion: "",
-      dialogAnswer: ""
+      dialogName: name,
+      dialogQuestion: question,
+      dialogAnswer: answer
     };
 
     this.handleDialogOpen = this.handleDialogOpen.bind(this);
@@ -31,14 +32,11 @@ export class EditCardButton extends Component {
   }
 
   handleDialogOpen() {
-    console.log(this.props.cardId)
     this.setState({ dialogOpen: true, loading: true });
     axios.post('/api/cards/getCardById', {
       cardId: this.props.cardId
     })
     .then(response => {
-      console.log("got a response")
-      console.log(response)
       this.setState({
         dialogName: response.data[0].name,
         dialogQuestion: response.data[0].question,
@@ -50,7 +48,7 @@ export class EditCardButton extends Component {
   }
 
   handleDialogSubmit() {
-    const { topicId, cardId, updateCard } = this.props;
+    const { topicId, card: { _id: cardId }, updateCard } = this.props;
     const {
       dialogName,
       dialogQuestion,
@@ -88,13 +86,12 @@ export class EditCardButton extends Component {
     } = this.state;
     return (
       <Grid container>
-
         <Dialog open={dialogOpen} onClose={this.handleDialogClose}>
           <DialogContent>
             {" "}
             <DialogTitle>Add a new card</DialogTitle>
             <DialogContentText>
-              You may submit a new card here
+              Edit card
             </DialogContentText>
             <TextField
               autoFocus

@@ -9,6 +9,13 @@ export default function(state = initialState, action) {
         ...state,
         ...action.payload
       };
+    case "LOGOUT_USER":
+      return {};
+    case "CREATE_USER":
+      return {
+        ...state,
+        ...action.payload
+      };
     default:
       return state;
   }

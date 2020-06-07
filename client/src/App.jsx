@@ -14,7 +14,7 @@ function App() {
   return (
     <Provider store={store}>
       <HashRouter>
-        <Grid container directoin="column">
+        <Grid container>
           <Navbar />
           <Switch>
             <Route exact path="/" component={LoginScreen} />

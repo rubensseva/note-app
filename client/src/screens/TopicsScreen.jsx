@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useHistory } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -14,12 +14,16 @@ import AddTopicButton from "../components/AddTopicButton";
 
 export class TopicsScreen extends Component {
   componentDidMount() {
-    const { getTopicsByUser } = this.props;
-    getTopicsByUser();
+    const { getTopicsByUser, user: { user: { _id } } } = this.props;
+    if (_id) {
+      getTopicsByUser(_id);
+    }
   }
 
   render() {
-    const { topics, addTopic, setActiveTopic } = this.props;
+    const { topics, user: { user: { _id: userId } }, addTopic, setActiveTopic } = this.props;
+    console.log("userid", userId);
+    console.log(this.props.user)
     return (
       <Grid container direction="column" alignItems="center">
         <Paper style={{ margin: "40px" }}>
@@ -27,7 +31,7 @@ export class TopicsScreen extends Component {
             Here you may find your own created topics, or create a new one
           </Typography>
         </Paper>
-        <AddTopicButton addTopic={addTopic} />
+        <AddTopicButton addTopic={addTopic} userId={userId} />
         <TopicsList topics={topics} setActiveTopic={setActiveTopic} />
       </Grid>
     );

@@ -27,15 +27,6 @@ export class Cards extends Component {
     }
   }
 
-  redirectToTopicScreen() {
-    const { topics } = this.props;
-    if (!topics.activeTopicId) {
-      return <Redirect to="/topics" />;
-    } else {
-      return null;
-    }
-  }
-
   render() {
     const {
       topics,
@@ -51,7 +42,6 @@ export class Cards extends Component {
     let mrk = "`this is code() int char def() ` hello "
     return (
       <Grid container>
-        {this.redirectToTopicScreen()}
         <AddCardButton activeTopicId={topics.activeTopicId} addCard={addCard} />
         <CardsContainer
           cards={cards}

@@ -1,41 +1,47 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 
-export class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { topicsRedirect: false };
+import { Logout } from "../actions/userActions";
 
-    this.setTopicRedirect = this.setTopicRedirect.bind(this);
+const Navbar = (props) => {
+  const history = useHistory();
+
+  const createButtonLink = (name, url) => (
+    <Button onClick={() => history.push(url)} color="inherit" variant="outlined" style={{margin: '20px'}}>
+      {name}
+    </Button>
+  )
+
+  const LogoutWrapper = () => {
+    const { Logout } = props;
+    Logout();
   }
-
-  setTopicRedirect() {
-    this.setState({ topicsRedirect: true });
-  }
-
-  renderRedirects() {
-    const { topicsRedirect } = this.state;
-    if (topicsRedirect) {
-      this.setState({ topicsRedirect: false });
-      return <Redirect to="/topics" />;
-    }
-  }
-
-  render() {
-    return (
-      <AppBar position="static">
-        <Toolbar>
-          <Button onClick={this.setTopicRedirect} color="inherit" variant="outlined">
-            Topics
+  const { user: { user } } = props;
+  return (
+    <AppBar position="static" style={{zIndex: 9999}}>
+      <Toolbar>
+        {createButtonLink('Topics', '/topics')}
+        {createButtonLink('Cards', '/cards')}
+        { user && user._id ? <Button onClick={LogoutWrapper} color="inherit" variant="outlined" style={{marginLeft: 'auto', marginRight: '-12'}}>
+            Logout
           </Button>
-        </Toolbar>
-        {this.renderRedirects()}
-      </AppBar>
-    );
-  }
+            :
+            <Button onClick={() => history.push('/')} color="inherit" variant="outlined" style={{marginLeft: 'auto', marginRight: '-12'}} align='right'>
+              Login
+            </Button>
+        }
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default Navbar;
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(
+  mapStateToProps,
+  { Logout }
+)(Navbar);

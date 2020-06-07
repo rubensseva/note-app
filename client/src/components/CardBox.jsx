@@ -32,7 +32,7 @@ export class CardBox extends Component {
 
   render() {
     const { card, deleteCard, updateCard } = this.props;
-    const { name, question, answer, id, topicId } = card;
+    const { name, question, answer, _id, topic } = card;
     const { isFlipped, color } = this.state;
     return (
       <Grid item style={{margin: "30px"}} >
@@ -63,10 +63,10 @@ export class CardBox extends Component {
         </ReactCardFlip>
         <Grid container direction="row" >
           <Grid item >
-            <DeleteCardButton cardId={id} topicId={topicId} deleteCard={deleteCard}/>
+            <DeleteCardButton cardId={_id} topicId={topic} deleteCard={deleteCard}/>
           </Grid>
           <Grid item >
-            <EditCardButton cardId={id} topicId={topicId} updateCard={updateCard}/>
+            <EditCardButton card={card} topicId={topic} updateCard={updateCard}/>
           </Grid>
         </Grid>
       </Grid>

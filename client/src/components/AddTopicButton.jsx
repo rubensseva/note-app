@@ -28,9 +28,9 @@ export class AddTopicButton extends Component {
     this.setState({ topicDialogOpen: true });
   }
   addTopic() {
-    const { addTopic } = this.props;
+    const { addTopic, userId } = this.props;
     const { topicName, topicDescription } = this.state;
-    addTopic(topicName, topicDescription);
+    addTopic(topicName, topicDescription, userId);
     this.setState({
       topicDialogOpen: false,
       topicName: "",

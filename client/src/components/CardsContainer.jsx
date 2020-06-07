@@ -6,7 +6,6 @@ import CardBox from "./CardBox";
 export const CardsContainer = props => {
   const { cards, activeTopicId, deleteCard, getCardsByUserTopic, updateCard } = props;
   console.log(props)
-  debugger;
   cards.cards = cards.cards || [];
 
   let cardsMapped = cards.cards.map(card => (

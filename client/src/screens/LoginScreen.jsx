@@ -1,47 +1,50 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+
 
 import {
   LoginUserWithCredentials,
-  LoginUserWithCookie
+  CreateUser
 } from "../actions/userActions";
 import LoginForm from "../components/LoginForm";
+import CreateUserButton from "../components/CreateUserButton";
 
-export class LoginScreen extends Component {
-  constructor(props) {
-    super(props);
 
-    this.renderRedirect = this.renderRedirect.bind(this);
-  }
 
-  componentDidMount() {
-    const { LoginUserWithCookie } = this.props;
-    LoginUserWithCookie();
-  }
+const LoginScreen = (props) => {
 
-  renderRedirect() {
-    const { user } = this.props;
-    console.log(user);
-    if (user && user.user && user.user.username) {
-      return <Redirect to="/topics" />;
-    }
-  }
-  render() {
-    const { LoginUserWithCredentials } = this.props;
-    return (
-      <Grid container direction="column">
-        <LoginForm LoginUserWithCredentials={LoginUserWithCredentials} />
-        {this.renderRedirect()}
-      </Grid>
-    );
-  }
+  const [open, setOpen] = React.useState(false);
+
+  const { LoginUserWithCredentials, CreateUser, user: { user } } = props
+
+  useEffect(() => {
+    const { user: { user }} = props;
+    setOpen(user && user._id);
+  }, [user])
+
+  return (
+    <Grid container direction="column">
+
+      <Dialog open={open}>
+        <DialogTitle id="simple-dialog-title">
+        You are logged in as {user ? user.username : "no name found"}
+          </DialogTitle>
+      </Dialog>
+
+
+
+      <LoginForm LoginUserWithCredentials={LoginUserWithCredentials}/>
+      <CreateUserButton CreateUser={CreateUser} />
+    </Grid>
+  );
 }
 
 const mapStateToProps = state => ({ user: state.user });
 
 export default connect(
   mapStateToProps,
-  { LoginUserWithCredentials, LoginUserWithCookie }
+  { LoginUserWithCredentials, CreateUser }
 )(LoginScreen);
